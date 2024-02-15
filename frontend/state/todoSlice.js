@@ -13,7 +13,16 @@ export const todoSlice = createSlice({
     { id: getNextId(), label: 'Dishes', complete: false },
         ],
         showCompletedTodos: true,
+    },
+    reducers: {
+        toggleShowCompletedTodos: state => {
+            state.showCompletedTodos = !state.showCompletedTodos
+        }
     }
 })
+
+export const {
+    toggleShowCompletedTodos,
+} = todoSlice.actions
 
 export default todoSlice.reducer

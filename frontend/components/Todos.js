@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { toggleShowCompletedTodos } from '../state/todoSlice'
 
 const StyledTodo = styled.li`
   text-decoration: ${pr => pr.$complete ? 'line-through' : 'initial'};
@@ -10,6 +11,7 @@ let id = 1
 const getNextId = () => id++
 
 export default function Todo() {
+  const dispatch = useDispatch()
   const todos = useSelector(st => st.todosState.todos)
   const showCompletedTodos = useSelector(st => st.todosState.showCompletedTodos)
 
@@ -29,7 +31,8 @@ export default function Todo() {
             ))
         }
       </ul>
-      <button>
+      <button
+      onClick={() => dispatch(toggleShowCompletedTodos())}>
         {showCompletedTodos ? 'Hide' : 'Show'} completed todos
       </button>
     </div>
