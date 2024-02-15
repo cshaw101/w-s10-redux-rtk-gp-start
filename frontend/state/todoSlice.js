@@ -15,6 +15,14 @@ export const todoSlice = createSlice({
         showCompletedTodos: true,
     },
     reducers: {
+        createNewTodo: {
+        prepare(label, complete) {
+            return { payload: {id: getNextId(), label, complete}}
+        },
+        reducer(state, action) {
+            state.todos.push(action.payload)
+        }
+        },
         toggleTodo: (state, action) => {
         let todo = state.todos.find(td => td.id === action.payload)
         todo.complete = !todo.complete
@@ -26,6 +34,7 @@ export const todoSlice = createSlice({
 })
 
 export const {
+    createNewTodo,
     toggleTodo,
     toggleShowCompletedTodos,
 } = todoSlice.actions
