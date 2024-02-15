@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
-import { toggleShowCompletedTodos } from '../state/todoSlice'
+import { toggleShowCompletedTodos, toggleTodo } from '../state/todoSlice'
 
 const StyledTodo = styled.li`
   text-decoration: ${pr => pr.$complete ? 'line-through' : 'initial'};
@@ -25,7 +25,8 @@ export default function Todo() {
               return showCompletedTodos || !todo.complete
             })
             .map(todo => (
-              <StyledTodo $complete={todo.complete} key={todo.id}>
+              <StyledTodo
+              onClick={() => dispatch(toggleTodo(todo.id))} $complete={todo.complete} key={todo.id}>
                 <span>{todo.label}{todo.complete && ' ✔️'}</span>
               </StyledTodo>
             ))
